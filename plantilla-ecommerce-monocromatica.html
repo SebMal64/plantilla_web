@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#171717">
+  <meta name="description" content="[Descripción breve del negocio y su propuesta de valor]">
+  <title>[Nombre de la marca] | [Categoría del negocio]</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            seed: { teal: '#737373', pale: '#d4d4d4', blush: '#e5e5e5', coral: '#171717', ink: '#171717', cream: '#fafafa' }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif']
+          },
+          boxShadow: {
+            soft: '0 18px 55px rgba(38, 59, 61, .09)',
+            card: '0 10px 35px rgba(38, 59, 61, .07)'
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: Inter, sans-serif; }
+    h1,h2,h3,.font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .nav-link { position: relative; }
+    .nav-link::after { content:""; position:absolute; left:0; bottom:-7px; width:0; height:2px; background:#171717; transition:width .3s ease; }
+    .nav-link:hover::after { width:100%; }
+    .product-card img { transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+    .product-card:hover img { transform: scale(1.055); }
+    .cart-scroll::-webkit-scrollbar { width:5px; }
+    .cart-scroll::-webkit-scrollbar-thumb { background:#d4d4d4; border-radius:10px; }
+    .toast { animation: toastIn .3s ease both; }
+    @keyframes toastIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+    .hero-orb { background: radial-gradient(circle at 35% 30%, #fff 0, #e5e5e5 43%, #a3a3a3 100%); }
+  </style>
+</head>
+
+<body class="bg-seed-cream text-seed-ink antialiased">
+  <!-- Navbar -->
+  <header class="sticky top-0 z-40 border-b border-seed-ink/5 bg-white/90 backdrop-blur-xl">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8" aria-label="Navegación principal">
+      <a href="#inicio" class="flex items-center gap-2" aria-label="[Nombre de la marca], ir al inicio">
+        <span class="grid h-10 w-10 place-items-center rounded-2xl bg-neutral-700 text-white"><i data-lucide="sprout" class="h-6 w-6"></i></span>
+        <span class="font-display text-xl font-extrabold tracking-tight">[Nombre de la marca]</span>
+      </a>
+
+      <div class="hidden items-center gap-9 md:flex">
+        <a class="nav-link text-sm font-semibold text-seed-ink/75 hover:text-seed-ink transition-all duration-300" href="#inicio">Inicio</a>
+        <a class="nav-link text-sm font-semibold text-seed-ink/75 hover:text-seed-ink transition-all duration-300" href="#productos">Productos</a>
+        <a class="nav-link text-sm font-semibold text-seed-ink/75 hover:text-seed-ink transition-all duration-300" href="#nosotros">[Nombre de sección]</a>
+        <a class="nav-link text-sm font-semibold text-seed-ink/75 hover:text-seed-ink transition-all duration-300" href="#opiniones">Opiniones</a>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button id="cart-open" class="relative grid h-11 w-11 place-items-center rounded-full bg-neutral-200 text-seed-ink transition-all duration-300 hover:bg-neutral-900 hover:text-white" aria-label="Abrir carrito">
+          <i data-lucide="shopping-bag" class="h-5 w-5"></i>
+          <span id="cart-count" class="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-neutral-900 px-1 text-[10px] font-bold text-white">0</span>
+        </button>
+        <a href="#productos" class="hidden rounded-full bg-neutral-900 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-black/10 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#404040] sm:inline-flex">Pedir ahora</a>
+        <button id="menu-toggle" class="grid h-11 w-11 place-items-center rounded-full border border-seed-ink/10 md:hidden" aria-label="Abrir menú" aria-expanded="false">
+          <i data-lucide="menu" class="h-5 w-5"></i>
+        </button>
+      </div>
+    </nav>
+    <div id="mobile-menu" class="hidden border-t border-seed-ink/5 bg-white px-5 py-4 md:hidden">
+      <div class="flex flex-col gap-4 text-sm font-semibold">
+        <a href="#inicio" class="mobile-link">Inicio</a>
+        <a href="#productos" class="mobile-link">Productos</a>
+        <a href="#nosotros" class="mobile-link">[Nombre de sección]</a>
+        <a href="#opiniones" class="mobile-link">Opiniones</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section id="inicio" class="relative overflow-hidden">
+      <div class="absolute -left-36 top-16 h-72 w-72 rounded-full bg-neutral-200/50 blur-3xl"></div>
+      <div class="absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-neutral-200/80 blur-3xl"></div>
+      <div class="relative mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 md:py-24 lg:grid-cols-[1.02fr_.98fr] lg:px-8 lg:py-28">
+        <div class="max-w-2xl">
+          <span class="mb-6 inline-flex items-center gap-2 rounded-full border border-neutral-500/30 bg-white/80 px-4 py-2 text-xs font-bold uppercase tracking-[.16em] text-[#404040]">
+            <span class="h-2 w-2 rounded-full bg-neutral-900"></span> [Frase breve de identidad de marca]
+          </span>
+          <h1 class="font-display text-5xl font-extrabold leading-[1.08] tracking-tight sm:text-6xl lg:text-[4.35rem]">[Título principal persuasivo]</h1>
+          <p class="mt-6 max-w-xl text-base leading-8 text-seed-ink/65 sm:text-lg">[Descripción principal del negocio, sus productos y su propuesta de valor.]</p>
+          <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+            <a href="#productos" class="inline-flex items-center justify-center gap-2 rounded-full bg-neutral-900 px-7 py-4 text-sm font-bold text-white shadow-xl shadow-black/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">[Texto del botón principal] <i data-lucide="arrow-up-right" class="h-4 w-4"></i></a>
+            <a href="#nosotros" class="inline-flex items-center justify-center gap-2 rounded-full border border-seed-ink/15 bg-white/70 px-7 py-4 text-sm font-bold transition-all duration-300 hover:border-neutral-500 hover:bg-white">[Texto del botón secundario]</a>
+          </div>
+          <div class="mt-10 flex flex-wrap items-center gap-x-7 gap-y-3 text-xs font-semibold text-seed-ink/55">
+            <span class="flex items-center gap-2"><i data-lucide="heart" class="h-4 w-4 text-neutral-900"></i> [Beneficio principal 1]</span>
+            <span class="flex items-center gap-2"><i data-lucide="leaf" class="h-4 w-4 text-[#525252]"></i> [Beneficio principal 2]</span>
+          </div>
+        </div>
+        <div class="relative mx-auto w-full max-w-xl">
+          <div class="hero-orb absolute inset-5 rounded-[3rem] rotate-3"></div>
+          <div class="relative overflow-hidden rounded-[2.5rem] border-[10px] border-white shadow-soft">
+            <img src="[URL_IMAGEN_HERO]" alt="[Texto alternativo de la imagen principal]" class="h-[390px] w-full object-cover sm:h-[510px]">
+          </div>
+          <div class="absolute -bottom-6 -left-2 rounded-2xl bg-white p-4 shadow-soft sm:-left-8 sm:p-5">
+            <div class="flex items-center gap-3">
+              <span class="grid h-11 w-11 place-items-center rounded-xl bg-neutral-200 text-neutral-900"><i data-lucide="cake-slice" class="h-5 w-5"></i></span>
+              <div><p class="font-display text-sm font-extrabold">[Texto destacado]</p><p class="mt-1 text-xs text-seed-ink/55">[Descripción del texto destacado]</p></div>
+            </div>
+          </div>
+          <div class="absolute -right-2 top-8 rounded-2xl bg-white/95 px-4 py-3 shadow-soft sm:-right-7">
+            <p class="font-display text-sm font-extrabold">Un momento</p><p class="text-xs text-seed-ink/55">solo para ti ✨</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Beneficios -->
+    <section id="nosotros" class="bg-white py-20">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <span class="text-xs font-bold uppercase tracking-[.2em] text-[#525252]">[Nombre de sección]</span>
+          <h2 class="mt-3 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">[Título de sección]</h2>
+          <p class="mt-4 leading-7 text-seed-ink/60">[Descripción de la sección sobre la marca.]</p>
+        </div>
+        <div class="mt-12 grid gap-5 md:grid-cols-3">
+          <article class="rounded-3xl bg-seed-cream p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-card">
+            <span class="grid h-14 w-14 place-items-center rounded-2xl bg-neutral-200 text-neutral-900"><i data-lucide="leaf" class="h-7 w-7"></i></span>
+            <h3 class="mt-6 font-display text-xl font-extrabold">[Beneficio o servicio 1]</h3>
+            <p class="mt-3 text-sm leading-7 text-seed-ink/60">[Descripción del beneficio o servicio 1.]</p>
+          </article>
+          <article class="rounded-3xl bg-[#f5f5f5] p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-card">
+            <span class="grid h-14 w-14 place-items-center rounded-2xl bg-neutral-200 text-[#404040]"><i data-lucide="hand-heart" class="h-7 w-7"></i></span>
+            <h3 class="mt-6 font-display text-xl font-extrabold">[Beneficio o servicio 2]</h3>
+            <p class="mt-3 text-sm leading-7 text-seed-ink/60">[Descripción del beneficio o servicio 2.]</p>
+          </article>
+          <article class="rounded-3xl bg-[#f5f5f5] p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-card">
+            <span class="grid h-14 w-14 place-items-center rounded-2xl bg-white text-neutral-900"><i data-lucide="smile" class="h-7 w-7"></i></span>
+            <h3 class="mt-6 font-display text-xl font-extrabold">[Beneficio o servicio 3]</h3>
+            <p class="mt-3 text-sm leading-7 text-seed-ink/60">[Descripción del beneficio o servicio 3.]</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Productos -->
+    <section id="productos" class="py-20">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+          <div><span class="text-xs font-bold uppercase tracking-[.2em] text-[#525252]">[Etiqueta del catálogo]</span><h2 class="mt-3 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">[Título del catálogo]</h2><p class="mt-3 text-sm leading-7 text-seed-ink/60">[Descripción del catálogo]</p></div>
+          <label class="relative block w-full sm:max-w-xs"><span class="sr-only">Buscar productos</span><i data-lucide="search" class="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-seed-ink/40"></i><input id="product-search" type="search" placeholder="[Buscar productos...]" class="w-full rounded-full border border-seed-ink/10 bg-white py-3 pl-11 pr-4 text-sm outline-none transition-all duration-300 focus:border-neutral-500 focus:ring-4 focus:ring-neutral-500/10"></label>
+        </div>
+        <div class="mt-8 flex flex-wrap gap-2" id="category-filters">
+          <button class="filter-btn rounded-full bg-seed-ink px-5 py-2.5 text-xs font-bold text-white transition-all duration-300" data-category="Todos">Todos</button>
+          <button class="filter-btn rounded-full border border-seed-ink/10 bg-white px-5 py-2.5 text-xs font-bold text-seed-ink/65 transition-all duration-300 hover:border-neutral-500" data-category="[Categoría 1]">[Categoría 1]</button>
+          <button class="filter-btn rounded-full border border-seed-ink/10 bg-white px-5 py-2.5 text-xs font-bold text-seed-ink/65 transition-all duration-300 hover:border-neutral-500" data-category="[Categoría 2]">[Categoría 2]</button>
+          <button class="filter-btn rounded-full border border-seed-ink/10 bg-white px-5 py-2.5 text-xs font-bold text-seed-ink/65 transition-all duration-300 hover:border-neutral-500" data-category="[Categoría 3]">[Categoría 3]</button>
+        </div>
+        <div id="product-grid" class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <!-- Productos renderizados con JavaScript -->
+        </div>
+        <p id="empty-products" class="hidden py-16 text-center text-sm text-seed-ink/55">[Mensaje cuando no hay resultados.]</p>
+      </div>
+    </section>
+
+    <!-- Franja -->
+    <section class="px-5 pb-20 lg:px-8">
+      <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-7 overflow-hidden rounded-[2rem] bg-neutral-700 px-8 py-10 text-white sm:flex-row sm:px-12">
+        <div class="max-w-xl"><p class="text-xs font-bold uppercase tracking-[.18em] text-white/75">[Etiqueta de promoción]</p><h2 class="mt-3 font-display text-2xl font-extrabold sm:text-3xl">[Título de promoción o mensaje destacado]</h2></div>
+        <a href="#productos" class="shrink-0 rounded-full bg-white px-7 py-4 text-sm font-bold text-seed-ink transition-all duration-300 hover:-translate-y-1 hover:bg-neutral-200">[Texto del botón de promoción] <i data-lucide="arrow-right" class="ml-2 inline h-4 w-4"></i></a>
+      </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section id="opiniones" class="bg-white py-20">
+      <div class="mx-auto max-w-7xl px-5 lg:px-8">
+        <div class="mx-auto max-w-xl text-center"><span class="text-xs font-bold uppercase tracking-[.2em] text-[#525252]">[Etiqueta de testimonios]</span><h2 class="mt-3 font-display text-3xl font-extrabold sm:text-4xl">[Título de testimonios]</h2><p class="mt-4 text-sm leading-7 text-seed-ink/60">[Descripción de testimonios]</p></div>
+        <div class="mt-12 grid gap-5 md:grid-cols-3">
+          <article class="rounded-3xl border border-seed-ink/5 bg-seed-cream p-7"><div class="flex gap-1 text-[#525252]" aria-label="5 de 5 estrellas">★★★★★</div><p class="mt-5 text-sm leading-7 text-seed-ink/70">“[Reseña real del cliente 1]”</p><div class="mt-7 flex items-center gap-3"><div class="grid h-10 w-10 place-items-center rounded-full bg-neutral-200 font-bold text-neutral-900">M</div><div><p class="text-sm font-bold">[Nombre del cliente 1]</p><p class="text-xs text-seed-ink/45">Cliente</p></div></div></article>
+          <article class="rounded-3xl border border-seed-ink/5 bg-seed-cream p-7"><div class="flex gap-1 text-[#525252]" aria-label="5 de 5 estrellas">★★★★★</div><p class="mt-5 text-sm leading-7 text-seed-ink/70">“[Reseña real del cliente 2]”</p><div class="mt-7 flex items-center gap-3"><div class="grid h-10 w-10 place-items-center rounded-full bg-neutral-200 font-bold text-[#404040]">D</div><div><p class="text-sm font-bold">[Nombre del cliente 2]</p><p class="text-xs text-seed-ink/45">Cliente</p></div></div></article>
+          <article class="rounded-3xl border border-seed-ink/5 bg-seed-cream p-7"><div class="flex gap-1 text-[#525252]" aria-label="5 de 5 estrellas">★★★★★</div><p class="mt-5 text-sm leading-7 text-seed-ink/70">“[Reseña real del cliente 3]”</p><div class="mt-7 flex items-center gap-3"><div class="grid h-10 w-10 place-items-center rounded-full bg-[#e5e5e5] font-bold text-[#525252]">V</div><div><p class="text-sm font-bold">[Nombre del cliente 3]</p><p class="text-xs text-seed-ink/45">Cliente</p></div></div></article>
+        </div>
+        <p class="mt-5 text-center text-[11px] text-seed-ink/40">Reemplaza estos campos por reseñas reales y autorizadas antes de publicar.</p>
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" class="py-20">
+      <div class="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-2 lg:items-center lg:px-8">
+        <div><span class="text-xs font-bold uppercase tracking-[.2em] text-[#525252]">[Etiqueta de contacto]</span><h2 class="mt-3 max-w-lg font-display text-4xl font-extrabold leading-tight sm:text-5xl">[Título de contacto]</h2><p class="mt-5 max-w-lg text-sm leading-8 text-seed-ink/60">[Texto que invita al visitante a ponerse en contacto.]</p><div class="mt-8 flex items-center gap-3"><span class="grid h-12 w-12 place-items-center rounded-2xl bg-neutral-200 text-neutral-900"><i data-lucide="message-circle" class="h-6 w-6"></i></span><div><p class="text-sm font-bold">[Título de atención]</p><p class="mt-1 text-xs text-seed-ink/50">[Descripción de atención]</p></div></div></div>
+        <form id="contact-form" class="rounded-[2rem] bg-white p-7 shadow-soft sm:p-9" novalidate>
+          <h3 class="font-display text-xl font-extrabold">[Título del formulario]</h3>
+          <p class="mt-2 text-xs text-seed-ink/50">[Instrucciones del formulario y canal de contacto.]</p>
+          <div class="mt-6 space-y-4">
+            <div><label for="contact-name" class="mb-2 block text-xs font-bold">Tu nombre</label><input id="contact-name" name="name" required minlength="2" class="w-full rounded-xl border border-seed-ink/10 bg-seed-cream px-4 py-3 text-sm outline-none transition-all duration-300 focus:border-neutral-500 focus:ring-4 focus:ring-neutral-500/10" placeholder="[Placeholder de nombre]"><p class="field-error mt-1 hidden text-xs text-red-500"></p></div>
+            <div><label for="contact-email" class="mb-2 block text-xs font-bold">Correo electrónico</label><input id="contact-email" name="email" type="email" required class="w-full rounded-xl border border-seed-ink/10 bg-seed-cream px-4 py-3 text-sm outline-none transition-all duration-300 focus:border-neutral-500 focus:ring-4 focus:ring-neutral-500/10" placeholder="[Placeholder de correo]"><p class="field-error mt-1 hidden text-xs text-red-500"></p></div>
+            <div><label for="contact-message" class="mb-2 block text-xs font-bold">¿En qué podemos ayudarte?</label><textarea id="contact-message" name="message" required minlength="8" rows="4" class="w-full resize-none rounded-xl border border-seed-ink/10 bg-seed-cream px-4 py-3 text-sm outline-none transition-all duration-300 focus:border-neutral-500 focus:ring-4 focus:ring-neutral-500/10" placeholder="[Placeholder de mensaje]"></textarea><p class="field-error mt-1 hidden text-xs text-red-500"></p></div>
+            <button type="submit" class="flex w-full items-center justify-center gap-2 rounded-full bg-neutral-900 px-6 py-4 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#404040]">[Texto del botón de envío] <i data-lucide="send" class="h-4 w-4"></i></button>
+            <p class="text-center text-[10px] leading-5 text-seed-ink/40">[Aviso de privacidad y funcionamiento del formulario.]</p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#171717] text-white">
+    <div class="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
+      <div class="sm:col-span-2"><a href="#inicio" class="inline-flex items-center gap-2"><span class="grid h-10 w-10 place-items-center rounded-2xl bg-neutral-700"><i data-lucide="sprout" class="h-6 w-6"></i></span><span class="font-display text-xl font-extrabold">[Nombre de la marca]</span></a><p class="mt-5 max-w-sm text-sm leading-7 text-white/55">[Descripción breve de la marca para el pie de página.]</p></div>
+      <div><h3 class="text-sm font-bold">[Título de enlaces rápidos]</h3><div class="mt-5 flex flex-col gap-3 text-sm text-white/55"><a class="transition hover:text-white" href="#inicio">Inicio</a><a class="transition hover:text-white" href="#productos">Productos</a><a class="transition hover:text-white" href="#nosotros">[Nombre de sección]</a><a class="transition hover:text-white" href="#opiniones">Opiniones</a></div></div>
+      <div><h3 class="text-sm font-bold">[Título de redes sociales]</h3><div class="mt-5 flex gap-3"><a href="[URL_INSTAGRAM]" class="social-link grid h-10 w-10 place-items-center rounded-full bg-white/10 transition-all duration-300 hover:bg-neutral-900" aria-label="Instagram"><i data-lucide="instagram" class="h-4 w-4"></i></a><a href="[URL_FACEBOOK]" class="social-link grid h-10 w-10 place-items-center rounded-full bg-white/10 transition-all duration-300 hover:bg-neutral-900" aria-label="Facebook"><i data-lucide="facebook" class="h-4 w-4"></i></a><a href="#" id="footer-whatsapp" class="grid h-10 w-10 place-items-center rounded-full bg-white/10 transition-all duration-300 hover:bg-neutral-900" aria-label="WhatsApp"><i data-lucide="message-circle" class="h-4 w-4"></i></a></div><p class="mt-4 text-xs leading-6 text-white/40">[Texto de invitación a seguir las redes sociales.]</p></div>
+    </div>
+    <div class="border-t border-white/10"><div class="mx-auto flex max-w-7xl flex-col gap-2 px-5 py-5 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between lg:px-8"><p>© <span id="year"></span> [Nombre de la marca]. [Aviso legal de derechos reservados.]</p><p>[Frase de cierre de marca.]</p></div></div>
+  </footer>
+
+  <!-- Cart drawer -->
+  <div id="cart-overlay" class="invisible fixed inset-0 z-50 bg-seed-ink/40 opacity-0 transition-all duration-300" aria-hidden="true"></div>
+  <aside id="cart-panel" class="fixed right-0 top-0 z-[60] flex h-full w-full max-w-md translate-x-full flex-col bg-white shadow-2xl transition-transform duration-300" aria-label="Carrito de compras" aria-hidden="true">
+    <div class="flex items-center justify-between border-b border-seed-ink/10 px-6 py-5"><div><h2 class="font-display text-xl font-extrabold">Tu carrito</h2><p class="mt-1 text-xs text-seed-ink/50">[Descripción del carrito]</p></div><button id="cart-close" class="grid h-10 w-10 place-items-center rounded-full bg-seed-cream transition hover:bg-neutral-200" aria-label="Cerrar carrito"><i data-lucide="x" class="h-5 w-5"></i></button></div>
+    <div id="cart-items" class="cart-scroll flex-1 overflow-y-auto px-6 py-5"></div>
+    <div class="border-t border-seed-ink/10 px-6 py-5"><div class="flex items-center justify-between"><span class="text-sm font-semibold text-seed-ink/60">Subtotal</span><strong id="cart-subtotal" class="font-display text-xl">S/ 0.00</strong></div><p class="mt-2 text-[11px] leading-5 text-seed-ink/45">[Información sobre entrega, impuestos u otros cargos.]</p><button id="checkout-button" class="mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-neutral-900 px-6 py-4 text-sm font-bold text-white transition-all duration-300 hover:bg-[#404040] disabled:cursor-not-allowed disabled:opacity-40" disabled>[Texto del botón de compra] <i data-lucide="arrow-right" class="h-4 w-4"></i></button></div>
+  </aside>
+  <div id="toast" class="pointer-events-none fixed bottom-5 left-1/2 z-[80] hidden -translate-x-1/2 rounded-full bg-seed-ink px-5 py-3 text-xs font-semibold text-white shadow-xl"></div>
+
+  <script>
+    // CONFIGURACIÓN: reemplaza este número por tu WhatsApp con código de país, sin + ni espacios.
+    const WHATSAPP_NUMBER = "[NUMERO_WHATSAPP]"; // Código de país + número, solo dígitos.
+
+    // PLANTILLA: duplica o elimina objetos para adaptar el catálogo.
+    // Sustituye cada marcador entre corchetes por datos reales.
+    const products = [
+      { id: 1, name: "[Nombre del producto 1]", category: "[Categoría 1]", description: "[Descripción breve del producto 1]", price: 0.00, image: "[URL_IMAGEN_1]", tag: "[Etiqueta 1]" },
+      { id: 2, name: "[Nombre del producto 2]", category: "[Categoría 2]", description: "[Descripción breve del producto 2]", price: 0.00, image: "[URL_IMAGEN_2]", tag: "[Etiqueta 2]" },
+      { id: 3, name: "[Nombre del producto 3]", category: "[Categoría 3]", description: "[Descripción breve del producto 3]", price: 0.00, image: "[URL_IMAGEN_3]", tag: "[Etiqueta 3]" },
+      { id: 4, name: "[Nombre del producto 4]", category: "[Categoría 1]", description: "[Descripción breve del producto 4]", price: 0.00, image: "[URL_IMAGEN_4]", tag: "[Etiqueta 4]" },
+      { id: 5, name: "[Nombre del producto 5]", category: "[Categoría 2]", description: "[Descripción breve del producto 5]", price: 0.00, image: "[URL_IMAGEN_5]", tag: "[Etiqueta 5]" },
+      { id: 6, name: "[Nombre del producto 6]", category: "[Categoría 3]", description: "[Descripción breve del producto 6]", price: 0.00, image: "[URL_IMAGEN_6]", tag: "[Etiqueta 6]" }
+    ];
+
+    let cart = [];
+    let activeCategory = "Todos";
+    const productGrid = document.getElementById("product-grid");
+    const cartPanel = document.getElementById("cart-panel");
+    const cartOverlay = document.getElementById("cart-overlay");
+
+    const money = value => `S/ ${value.toFixed(2)}`;
+
+    function renderProducts() {
+      const query = document.getElementById("product-search").value.trim().toLowerCase();
+      const filtered = products.filter(product =>
+        (activeCategory === "Todos" || product.category === activeCategory) &&
+        (product.name.toLowerCase().includes(query) || product.description.toLowerCase().includes(query))
+      );
+
+      productGrid.innerHTML = filtered.map(product => `
+        <article class="product-card group overflow-hidden rounded-3xl border border-seed-ink/5 bg-white shadow-card transition-all duration-300 hover:-translate-y-1 hover:shadow-soft">
+          <div class="relative overflow-hidden">
+            <img src="${product.image}" alt="${product.name}" loading="lazy" class="h-64 w-full object-cover">
+            <span class="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1.5 text-[10px] font-bold text-seed-ink">${product.tag}</span>
+            <button class="add-product absolute bottom-4 right-4 grid h-11 w-11 place-items-center rounded-full bg-neutral-900 text-white shadow-lg transition-all duration-300 hover:scale-110 hover:bg-[#404040]" data-id="${product.id}" aria-label="Añadir ${product.name} al carrito"><i data-lucide="plus" class="h-5 w-5"></i></button>
+          </div>
+          <div class="p-5">
+            <div class="flex items-start justify-between gap-3"><div><p class="text-[10px] font-bold uppercase tracking-[.15em] text-[#525252]">${product.category}</p><h3 class="mt-2 font-display text-lg font-extrabold">${product.name}</h3></div><span class="whitespace-nowrap font-display text-base font-extrabold">${money(product.price)}</span></div>
+            <p class="mt-3 min-h-[42px] text-xs leading-6 text-seed-ink/55">${product.description}</p>
+            <button class="add-product mt-5 flex w-full items-center justify-center gap-2 rounded-full border border-seed-ink/10 py-3 text-xs font-bold transition-all duration-300 hover:border-neutral-700 hover:bg-neutral-200" data-id="${product.id}">Añadir al carrito <i data-lucide="plus" class="h-3.5 w-3.5"></i></button>
+          </div>
+        </article>
+      `).join("");
+
+      document.getElementById("empty-products").classList.toggle("hidden", filtered.length !== 0);
+      lucide.createIcons();
+    }
+
+    function addToCart(id) {
+      const existing = cart.find(item => item.id === id);
+      if (existing) existing.quantity += 1;
+      else cart.push({ ...products.find(product => product.id === id), quantity: 1 });
+      renderCart();
+      showToast("¡Añadido a tu carrito!");
+    }
+
+    function updateQuantity(id, change) {
+      const item = cart.find(product => product.id === id);
+      if (!item) return;
+      item.quantity += change;
+      if (item.quantity <= 0) cart = cart.filter(product => product.id !== id);
+      renderCart();
+    }
+
+    function renderCart() {
+      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      document.getElementById("cart-count").textContent = count;
+      document.getElementById("cart-subtotal").textContent = money(subtotal);
+      document.getElementById("checkout-button").disabled = cart.length === 0;
+
+      document.getElementById("cart-items").innerHTML = cart.length ? cart.map(item => `
+        <div class="flex gap-4 border-b border-seed-ink/5 py-4">
+          <img src="${item.image}" alt="${item.name}" class="h-20 w-20 rounded-2xl object-cover">
+          <div class="min-w-0 flex-1"><div class="flex justify-between gap-2"><h3 class="text-sm font-bold">${item.name}</h3><button class="remove-item text-seed-ink/35 transition hover:text-red-500" data-id="${item.id}" aria-label="Eliminar ${item.name}"><i data-lucide="trash-2" class="h-4 w-4"></i></button></div><p class="mt-1 text-xs text-seed-ink/50">${money(item.price)} c/u</p><div class="mt-3 flex items-center gap-3"><button class="quantity-btn grid h-7 w-7 place-items-center rounded-full bg-seed-cream" data-id="${item.id}" data-change="-1" aria-label="Restar uno"><i data-lucide="minus" class="h-3 w-3"></i></button><span class="text-xs font-bold">${item.quantity}</span><button class="quantity-btn grid h-7 w-7 place-items-center rounded-full bg-seed-cream" data-id="${item.id}" data-change="1" aria-label="Sumar uno"><i data-lucide="plus" class="h-3 w-3"></i></button><strong class="ml-auto text-sm">${money(item.price * item.quantity)}</strong></div></div>
+        </div>
+      `).join("") : `<div class="flex h-full flex-col items-center justify-center text-center"><span class="grid h-16 w-16 place-items-center rounded-3xl bg-neutral-200 text-neutral-900"><i data-lucide="shopping-bag" class="h-7 w-7"></i></span><h3 class="mt-5 font-display text-lg font-extrabold">[Mensaje de carrito vacío]</h3><p class="mt-2 max-w-[220px] text-xs leading-6 text-seed-ink/50">[Título de enlaces rápidos] la vitrina y agrega ese postre que se te antoja.</p><button id="continue-shopping" class="mt-5 rounded-full bg-seed-ink px-5 py-3 text-xs font-bold text-white">Ver productos</button></div>`;
+      lucide.createIcons();
+    }
+
+    function openCart() {
+      cartPanel.classList.remove("translate-x-full");
+      cartOverlay.classList.remove("invisible", "opacity-0");
+      cartPanel.setAttribute("aria-hidden", "false");
+      cartOverlay.setAttribute("aria-hidden", "false");
+      document.body.classList.add("overflow-hidden");
+    }
+    function closeCart() {
+      cartPanel.classList.add("translate-x-full");
+      cartOverlay.classList.add("invisible", "opacity-0");
+      cartPanel.setAttribute("aria-hidden", "true");
+      cartOverlay.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("overflow-hidden");
+    }
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.remove("hidden");
+      toast.classList.add("toast");
+      clearTimeout(showToast.timeout);
+      showToast.timeout = setTimeout(() => toast.classList.add("hidden"), 2200);
+    }
+    function sendWhatsApp(message) {
+      if (!/^\\d{8,15}$/.test(WHATSAPP_NUMBER)) {
+        showToast("Configura [NUMERO_WHATSAPP] para activar los pedidos por WhatsApp.");
+        return;
+      }
+      window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+    }
+
+    productGrid.addEventListener("click", event => {
+      const button = event.target.closest(".add-product");
+      if (button) addToCart(Number(button.dataset.id));
+    });
+    document.getElementById("cart-items").addEventListener("click", event => {
+      const quantityButton = event.target.closest(".quantity-btn");
+      const removeButton = event.target.closest(".remove-item");
+      if (quantityButton) updateQuantity(Number(quantityButton.dataset.id), Number(quantityButton.dataset.change));
+      if (removeButton) {
+        cart = cart.filter(item => item.id !== Number(removeButton.dataset.id));
+        renderCart();
+      }
+      if (event.target.closest("#continue-shopping")) { closeCart(); document.getElementById("productos").scrollIntoView(); }
+    });
+    document.getElementById("category-filters").addEventListener("click", event => {
+      const button = event.target.closest(".filter-btn");
+      if (!button) return;
+      activeCategory = button.dataset.category;
+      document.querySelectorAll(".filter-btn").forEach(filter => {
+        filter.classList.toggle("bg-seed-ink", filter === button);
+        filter.classList.toggle("text-white", filter === button);
+        filter.classList.toggle("bg-white", filter !== button);
+        filter.classList.toggle("border", filter !== button);
+        filter.classList.toggle("border-seed-ink/10", filter !== button);
+        filter.classList.toggle("text-seed-ink/65", filter !== button);
+      });
+      renderProducts();
+    });
+    document.getElementById("product-search").addEventListener("input", renderProducts);
+    document.getElementById("cart-open").addEventListener("click", openCart);
+    document.getElementById("cart-close").addEventListener("click", closeCart);
+    cartOverlay.addEventListener("click", closeCart);
+    document.addEventListener("keydown", event => { if (event.key === "Escape") closeCart(); });
+
+    document.getElementById("checkout-button").addEventListener("click", () => {
+      if (!cart.length) return;
+      const lines = cart.map(item => `• ${item.name} x${item.quantity}: ${money(item.price * item.quantity)}`).join("\n");
+      const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+      sendWhatsApp(`¡Hola, [Nombre de la marca]! Quisiera realizar este pedido:\n\n${lines}\n\nSubtotal: ${money(total)}\n\n¿Me ayudan a coordinar la entrega?`);
+    });
+
+    document.getElementById("contact-form").addEventListener("submit", event => {
+      event.preventDefault();
+      const fields = [
+        { element: document.getElementById("contact-name"), validate: value => value.trim().length >= 2, error: "Escribe tu nombre (mínimo 2 caracteres)." },
+        { element: document.getElementById("contact-email"), validate: value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value), error: "Escribe un correo electrónico válido." },
+        { element: document.getElementById("contact-message"), validate: value => value.trim().length >= 8, error: "Cuéntanos un poco más (mínimo 8 caracteres)." }
+      ];
+      let valid = true;
+      fields.forEach(field => {
+        const errorElement = field.element.parentElement.querySelector(".field-error");
+        const isValid = field.validate(field.element.value);
+        errorElement.textContent = isValid ? "" : field.error;
+        errorElement.classList.toggle("hidden", isValid);
+        field.element.classList.toggle("border-red-400", !isValid);
+        if (!isValid) valid = false;
+      });
+      if (!valid) return;
+      const name = fields[0].element.value.trim();
+      const email = fields[1].element.value.trim();
+      const message = fields[2].element.value.trim();
+      sendWhatsApp(`¡Hola, [Nombre de la marca]! Soy ${name} (${email}).\n\n${message}`);
+    });
+
+    document.getElementById("menu-toggle").addEventListener("click", () => {
+      const menu = document.getElementById("mobile-menu");
+      const button = document.getElementById("menu-toggle");
+      const isOpen = !menu.classList.contains("hidden");
+      menu.classList.toggle("hidden");
+      button.setAttribute("aria-expanded", String(!isOpen));
+      button.innerHTML = isOpen ? '<i data-lucide="menu" class="h-5 w-5"></i>' : '<i data-lucide="x" class="h-5 w-5"></i>';
+      lucide.createIcons();
+    });
+    document.querySelectorAll(".mobile-link").forEach(link => link.addEventListener("click", () => {
+      document.getElementById("mobile-menu").classList.add("hidden");
+      document.getElementById("menu-toggle").setAttribute("aria-expanded", "false");
+      document.getElementById("menu-toggle").innerHTML = '<i data-lucide="menu" class="h-5 w-5"></i>';
+      lucide.createIcons();
+    }));
+    document.getElementById("footer-whatsapp").addEventListener("click", event => {
+      event.preventDefault();
+      sendWhatsApp("¡Hola, [Nombre de la marca]! Quisiera más información sobre sus productos.");
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+    renderProducts();
+    renderCart();
+    lucide.createIcons();
+  </script>
+</body>
+</html>
